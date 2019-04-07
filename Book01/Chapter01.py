@@ -58,7 +58,7 @@ print("B")
 print(B)
 
 #%%
-print("A * B gives elementwise product")
+print("A * B gives elementwise (Hadamard) product")
 print(A * B)
 print("A @ B or np.dot(A, B) gives dot product")
 print(A @ B)
@@ -115,11 +115,16 @@ print(v2)
 # Multiplication by row vector and a column vector
 
 #%%
-print("A")
+A = np.arange(1, 10).reshape(3,3)
+v1 = np.array([1, 10, 100])
+v2 = v1[:, np.newaxis]
+print("\nA\n")
 print(A)
-print("A * v1 # multiply by row vector")
+print("\nv1\n")
+print(v1)
+print("\nA * v1 # multiply by row vector\n")
 print(A * v1)
-print("A * v1[:, np.newaxis] # multiply by column vector")
+print("\nA * v1[:, np.newaxis] # multiply by column vector\n")
 print(A * v2)
 
 
