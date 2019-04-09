@@ -4,6 +4,7 @@
 #%%
 import numpy as np 
 import matplotlib.pyplot as plt
+import scipy as sp
 from scipy import sparse
 from scipy import linalg
 
@@ -34,12 +35,6 @@ def print_rank(A):
 print_rank(np.array([[0,0], [0,0]]))
 print_rank(np.array([[1,0], [1,0]]))
 print_rank(np.array([[1,0], [1,1]]))
-
-#%%
-# Calculate eigenvectors and eigenvalues
-w, v = np.linalg.eig(A)
-print("\nEigenvalues of A:\n", w)
-print("\nEigenvectors of A:\n", v)
 
 #%%
 # Calculate vector norms
@@ -159,3 +154,55 @@ print("\nTensor dot product of T1 and T2 at axes=1:\n",
     np.tensordot(T1, T2, axes=1))
 
 
+#%% [markdown]
+# __Matrix Decomposition__
+# https://en.wikipedia.org/wiki/Matrix_decomposition
+
+#%%
+# LU decomposition
+A = np.array([[1, 0, 2], [1, 2, 1], [0, 3, 1]])
+P, L, U = sp.linalg.lu(A)
+print("A: \n", A)
+print("Permutation matrix:\n", P)
+print("Lower triangular:\n", L)
+print("Upper triangular:\n", U)
+print("A reconstructed: \n", P @ L @ U)
+
+#%%
+# QR decomposition
+B = np.array([[1, -1], [2, 2], [0, 1]])
+Q, R = np.linalg.qr(B, 'complete')
+print("B: \n", B)
+print("Q:\n", Q)
+print("R:\n", R)
+print("B reconstructed: \n", Q @ R)
+
+#%%
+# Cholesky decomposition (for symmetric, positive-definite matrices)
+C = np.array([[2, 1], [1, 2]])
+L = np.linalg.cholesky(C)
+print("C: \n", C)
+print("L (Lower triangular):\n", L)
+print("Transpose of L:\n", L.T)
+print("C reconstructed: \n", L @ L.T)
+
+#%%
+# Eigen decomposition
+D = np.array([[1, 4, 3], [0, 1, 1], [0, 2, 1]])
+print("D: \n", D)
+# Calculate eigenvectors and eigenvalues
+values, vectors = np.linalg.eig(D)
+print("\nEigenvalues of A:\n", values)
+print("\nEigenvectors of A:\n", vectors)
+# Check first eigenvector
+D2 = D.dot(vectors[:, 0])
+D3 = vectors[:, 0] * values[0]
+print("\nChecking first eigenvector:\n", D2)
+print("\nShould be same as above:\n", D3)
+# Reconstruct original matrix from eigenvectors and eigenvalues
+N = np.linalg.inv(vectors)
+L = np.diag(values)
+print("\nQ: Inverse of eigenvectors:\n", N)
+print("\nR: Diagonal matrix from eigenvalues:\n", L)
+# reconstruct the original matrix
+print("\nDot product of eigenvectors * L * N\n", vectors.dot(L).dot(N))
