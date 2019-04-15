@@ -1,5 +1,5 @@
 #%% [markdown]
-# #NumPy and The Maths
+# #Vectors and Matrices
 
 #%%
 import numpy as np 
@@ -221,3 +221,27 @@ print(A)
 print("B = np.tile(A, (4,4))")
 B = np.tile(A, (4,4))
 print(B)
+
+#%% [markdown]
+# np.sum() and np.mean()
+
+#%%
+A = np.arange(1, 10).reshape(3,3)
+print("A \n", A)
+sum_by_column = np.sum(A, axis=0)
+sum_by_row = np.sum(A, axis=1)
+print("\n sum of A by column \n", sum_by_column)
+print("\n sum of A by row \n", sum_by_row)
+mean_by_column = np.mean(A, axis=0)
+mean_by_row = np.mean(A, axis=1)
+print("\n mean of A by column \n", mean_by_column)
+print("\n mean of A by row \n", mean_by_row)
+
+#%% [markdown]
+# Use np.cov() to calculate covariance
+
+#%%
+A = np.array([[-1, 1, 3], [3, 1, -1]])
+print("A \n", A)
+cov = np.cov(A)
+print("\n covariance matrix of A \n", cov)

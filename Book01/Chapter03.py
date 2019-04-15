@@ -161,7 +161,7 @@ print("\nTensor dot product of T1 and T2 at axes=1:\n",
 #%%
 # LU decomposition
 A = np.array([[1, 0, 2], [1, 2, 1], [0, 3, 1]])
-P, L, U = sp.linalg.lu(A)
+P, L, U = scipy.linalg.lu(A)
 print("A: \n", A)
 print("Permutation matrix:\n", P)
 print("Lower triangular:\n", L)
