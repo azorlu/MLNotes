@@ -245,3 +245,34 @@ A = np.array([[-1, 1, 3], [3, 1, -1]])
 print("A \n", A)
 cov = np.cov(A)
 print("\n covariance matrix of A \n", cov)
+
+#%% [markdown]
+# #Distance and angle between two vectors
+
+#%%
+# Compute distance between two vectors x, y using the dot product
+def distance(x,y):
+    x = np.array(x, dtype=np.float).ravel()
+    y = np.array(y, dtype=np.float).ravel()
+    distance = ((x - y).T @ (x - y)) ** 0.5
+    return distance
+
+#%%
+# Compute the angle between two vectors x, y using the dot product
+def angle(x, y):
+    angle = np.arccos((x.T @ y) / ((x.T @ x) * (y.T @ y)) ** 0.5)
+    return angle
+
+#%% 
+# sanity check
+a = np.array([1,0])
+b = np.array([0,1])
+np.testing.assert_almost_equal(distance(a, b), np.sqrt(2))
+assert((angle(a,b) / (np.pi * 2) * 360.) == 90)
+print("correct")
+
+
+
+
+
+
